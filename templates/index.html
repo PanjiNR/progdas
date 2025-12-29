@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analisis Pendapatan</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <style>
+        body { background-color: #f4f7f6; }
+        .main-card { border: none; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .header-section { background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%); color: white; padding: 2rem; border-radius: 15px 15px 0 0; }
+    </style>
+</head>
+<body>
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card main-card">
+                <div class="header-section text-center">
+                    <h2 class="fw-bold mb-0">Analisis Kesenjangan Wilayah</h2>
+                    <p class="mb-0 opacity-75">Hitung Indeks Gini & Statistik Pendapatan</p>
+                </div>
+
+                <div class="card-body p-4">
+                    <form method="POST">
+                        <div class="mb-4">
+                            <label for="wilayah" class="form-label fw-bold">Pilih Wilayah 1:</label>
+                            <select name="wilayah" id="wilayah" class="form-select form-select-lg">
+                                <option value="">-- Pilih Wilayah dari Firebase --</option>
+                                {% for w in wilayah %}
+                                    <option value="{{ w }}" {% if pilihan == w %}selected{% endif %}>{{ w }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="wilayah" class="form-label fw-bold">Pilih Wilayah 2:</label>
+                            <select name="wilayah" id="wilayah" class="form-select form-select-lg">
+                                <option value="">-- Pilih Wilayah dari Firebase --</option>
+                                {% for w in wilayah %}
+                                    <option value="{{ w }}" {% if pilihan == w %}selected{% endif %}>{{ w }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Masukkan Data Pendapatan:</label>
+                            <input type="text" name="pendapatan" class="form-control" 
+                                   placeholder="Contoh: 3000, 5000, 2000, 8000">
+                            <div class="form-text">Pisahkan angka dengan tanda koma (,).</div>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="bi bi-graph-up"></i> Mulai Analisis
+                            </button>
+                            <a href="/" class="btn btn-outline-danger btn-sm">Reset Data</a>
+                        </div>
+                    </form>
+
+                    {% if hasil %}
+                    <hr class="my-4">
+                    <div class="row g-3">
+                        <div class="col-sm-6">
+                            <div class="p-3 border rounded bg-light">
+                                <small class="text-muted d-block">Rata-rata</small>
+                                <span class="h5 fw-bold">{{ hasil.rata_rata }}</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="p-3 border rounded bg-light">
+                                <small class="text-muted d-block">Indeks Gini</small>
+                                <span class="h5 fw-bold text-primary">{{ hasil.gini }}</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="p-3 border rounded bg-light">
+                                <small class="text-muted d-block">Tertinggi</small>
+                                <span class="h5 fw-bold text-success">{{ hasil.tertinggi }}</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="p-3 border rounded bg-light">
+                                <small class="text-muted d-block">Terendah</small>
+                                <span class="h5 fw-bold text-danger">{{ hasil.terendah }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <p class="text-center mt-4 text-muted small">
+                © 2025 Aplikasi Analisis Wilayah • Powered by Flask & Bootstrap
+            </p>
+        </div>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+</body>
+</html>
