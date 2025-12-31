@@ -43,7 +43,7 @@ def index():
             )
             
             cursor.execute(query, values)
-            conn.commit() # Save changes
+            conn.commit() 
             cursor.close()
             conn.close()
         except ValueError:
@@ -53,4 +53,20 @@ def index():
 
     return render_template("index.html", hasil=hasil, nama_kelompok=nama_kelompok, error=error)
 
-
+@app.route("/riwayat")
+def riwayat():
+    try:
+        conn = get_db_connection()
+        # Use dictionary=True so we can access columns by name in HTML
+        cursor = conn.cursor(dictionary=True)
+        
+        # Select the data from your MySQL table
+        cursor.execute("SELECT * FROM hasil_statistik ORDER BY created_at DESC")
+        results = cursor.fetchall()
+        
+        cursor.close()
+        conn.close()
+        
+        return render_template("riwayat.html", data_history=results)
+    except Exception as e:
+        return f"Database Error: {e}"

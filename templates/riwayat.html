@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riwayat Analisis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <style>
+        body { background-color: #f4f7f6; }
+        .main-card { border: none; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .header-section { background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%); color: white; padding: 2rem; border-radius: 15px 15px 0 0; }
+        .table { margin-top: 1rem; }
+    </style>
+</head>
+<body>
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10"> <div class="card main-card">
+                <div class="header-section text-center">
+                    <h2 class="fw-bold mb-0">Riwayat Perhitungan</h2>
+                    <p class="mb-0 opacity-75">Data Analisis Kesenjangan yang Tersimpan</p>
+                </div>
+
+                <div class="card-body p-4">
+                    <div class="mb-4">
+                        <a href="{{ url_for('index') }}" class="btn btn-outline-primary btn-sm">
+                             ← Kembali ke Kalkulator
+                        </a>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Nama Kelompok</th>
+                                    <th>Rata-rata</th>
+                                    <th>Terendah</th>
+                                    <th>Tertinggi</th>
+                                    <th>Gini Index</th>
+                                    <th>Waktu</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for row in data_history %}
+                                <tr>
+                                    <td class="fw-bold text-primary">{{ row.nama_kelompok }}</td>
+                                    <td>{{ row.rata_rata }}</td>
+                                    <td>{{ row.terendah }}</td>
+                                    <td>{{ row.tertinggi }}</td>
+                                    <td><span class="badge bg-success">{{ row.gini }}</span></td>
+                                    <td class="text-muted small">{{ row.created_at }}</td>
+                                </tr>
+                                {% else %}
+                                <tr>
+                                    <td colspan="5" class="text-center text-muted">Belum ada data tersimpan.</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <p class="text-center mt-4 text-muted small">
+                © 2025 Aplikasi Analisis Wilayah • Powered by Flask & Bootstrap
+            </p>
+        </div>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+</body>
+</html>
