@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analisis Pendapatan</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <style>
+        body { background-color: #f4f7f6; }
+        .main-card { border: none; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .header-section { background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%); color: white; padding: 2rem; border-radius: 15px 15px 0 0; }
+    </style>
+</head>
+<body>
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card main-card">
+                <div class="header-section text-center">
+                    <h2 class="fw-bold mb-0">Perbandingan Indeks Gini</h2>
+                    <p class="mb-0 opacity-75">Bandingkan Indeks Gini</p>
+                </div>
+
+                <div class="card-body p-4">
+                    <div class="mb-3">
+                        <a href="{{ url_for('riwayat') }}" class="btn btn-outline-primary btn-sm">
+                            <i class="bi bi-arrow-left"></i> ← Kembali ke Riwayat
+                        </a>
+                    </div>
+                    <form method="POST">
+                        <div class="mb-4">
+                            <label for="wilayah" class="form-label fw-bold">Kelompok 1:</label>
+                            <select class="form-select" name="pilihan1" id="kelompok1" aria-label="Default select example">
+                            <option selected disabled>Pilih kelompok 1</option>
+                            {% for k in kelompok_list %}
+                                <option value="{{ k.id }}">{{ k.nama_kelompok }} (Gini: {{ k.gini }})</option>
+                            {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="wilayah" class="form-label fw-bold">Kelompok 2:</label>
+                            <select class="form-select" name="pilihan2" id="kelompok2" aria-label="Default select example">
+                            <option selected disabled>Pilih kelompok 2</option>
+                            {% for k in kelompok_list %}
+                                <option value="{{ k.id }}">{{ k.nama_kelompok }} (Gini: {{ k.gini }})</option>
+                            {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="bi bi-graph-up"></i> Bandingkan
+                            </button>
+                            <a href="{{ url_for('banding') }}" class="btn btn-outline-danger btn-sm">Reset Data</a>
+                        </div>
+                    </form>
+
+                    {% if hasil %}
+                        <div class="mt-5">
+                            <h4 class="text-center mb-4">Hasil Analisis Pemerataan</h4>
+
+                            <div class="alert alert-success text-center shadow-sm p-4">
+                                <h5 class="fw-bold">Kesimpulan:</h5>
+                                <p class="fs-5 mb-0">{{ hasil.pesan }}</p>
+                            </div>
+
+                            <div class="row g-3 mt-2">
+                                <div class="col-md-6">
+                                    <div class="card shadow-sm text-center">
+                                        <div class="card-header bg-light small fw-bold text-muted">Kelompok 1</div>
+                                        <div class="card-body">
+                                            <h6 class="mb-1">{{ hasil.d1.nama_kelompok }}</h6>
+                                            <h3 class="mb-0 text-primary">{{ hasil.d1.gini }}</h3>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="card shadow-sm text-center">
+                                        <div class="card-header bg-light small fw-bold text-muted">Kelompok 2</div>
+                                        <div class="card-body">
+                                            <h6 class="mb-1">{{ hasil.d2.nama_kelompok }}</h6>
+                                            <h3 class="mb-0 text-primary">{{ hasil.d2.gini }}</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+         
+            <p class="text-center mt-4 text-muted small">
+                © 2025 Aplikasi Analisis Wilayah • Powered by Flask & Bootstrap
+            </p>
+        </div>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+</body>
+</html>

@@ -70,3 +70,45 @@ def riwayat():
         return render_template("riwayat.html", data_history=results)
     except Exception as e:
         return f"Database Error: {e}"
+    
+@app.route("/banding", methods=["GET", "POST"])
+def banding():
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    
+    hasil_banding = None
+    
+    cursor.execute("SELECT id, nama_kelompok, gini FROM hasil_statistik")
+    daftar_kelompok = cursor.fetchall()
+    
+    if request.method == "POST":
+        id1 = request.form.get("pilihan1")
+        id2 = request.form.get("pilihan2")
+
+        if id1 and id2:
+            cursor.execute("SELECT * FROM hasil_statistik WHERE id IN (%s, %s)", (id1, id2))
+            items = cursor.fetchall()
+
+            if len(items) == 2:
+                d1_data = items[0] if str(items[0]['id']) == str(id1) else items[1]
+                
+            
+                d2_data = items[0] if str(items[0]['id']) == str(id2) else items[1]
+
+                if d1_data['gini'] < d2_data['gini']:
+                    pesan = f"{d1_data['nama_kelompok']} memiliki pemerataan pendapatan yang lebih baik dari {d2_data['nama_kelompok']}"
+                elif d2_data['gini'] < d1_data['gini']:
+                    pesan = f"{d2_data['nama_kelompok']} memiliki pemerataan pendapatan yang lebih baik dari {d1_data['nama_kelompok']}"
+                else:
+                    pesan = "Kedua kelompok memiliki tingkat pemerataan yang sama."
+
+ 
+                hasil_banding = {
+                    'pesan': pesan,
+                    'd1': d1_data,
+                    'd2': d2_data
+                }
+    
+    cursor.close()
+    conn.close()
+    return render_template("banding.html", kelompok_list=daftar_kelompok, hasil=hasil_banding)
