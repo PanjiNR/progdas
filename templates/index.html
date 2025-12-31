@@ -25,23 +25,8 @@
                 <div class="card-body p-4">
                     <form method="POST">
                         <div class="mb-4">
-                            <label for="wilayah" class="form-label fw-bold">Pilih Wilayah 1:</label>
-                            <select name="wilayah" id="wilayah" class="form-select form-select-lg">
-                                <option value="">-- Pilih Wilayah dari Firebase --</option>
-                                {% for w in wilayah %}
-                                    <option value="{{ w }}" {% if pilihan == w %}selected{% endif %}>{{ w }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-
-                        <div class="mb-4">
-                            <label for="wilayah" class="form-label fw-bold">Pilih Wilayah 2:</label>
-                            <select name="wilayah" id="wilayah" class="form-select form-select-lg">
-                                <option value="">-- Pilih Wilayah dari Firebase --</option>
-                                {% for w in wilayah %}
-                                    <option value="{{ w }}" {% if pilihan == w %}selected{% endif %}>{{ w }}</option>
-                                {% endfor %}
-                            </select>
+                            <label for="wilayah" class="form-label fw-bold">Nama kelompok:</label>
+                            <input type="text" name="namaKel" class="form-control" id="namaKel" placeholder="Masukan nama kelompok">
                         </div>
 
                         <div class="mb-4">
@@ -59,37 +44,25 @@
                         </div>
                     </form>
 
-                    {% if hasil %}
-                    <hr class="my-4">
-                    <div class="row g-3">
-                        <div class="col-sm-6">
-                            <div class="p-3 border rounded bg-light">
-                                <small class="text-muted d-block">Rata-rata</small>
-                                <span class="h5 fw-bold">{{ hasil.rata_rata }}</span>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="p-3 border rounded bg-light">
-                                <small class="text-muted d-block">Indeks Gini</small>
-                                <span class="h5 fw-bold text-primary">{{ hasil.gini }}</span>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="p-3 border rounded bg-light">
-                                <small class="text-muted d-block">Tertinggi</small>
-                                <span class="h5 fw-bold text-success">{{ hasil.tertinggi }}</span>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="p-3 border rounded bg-light">
-                                <small class="text-muted d-block">Terendah</small>
-                                <span class="h5 fw-bold text-danger">{{ hasil.terendah }}</span>
-                            </div>
-                        </div>
-                    </div>
-                    {% endif %}
-                </div>
-            </div>
+{% if error %}
+<p class="text-danger">{{ error }}</p>
+{% endif %}
+
+{% if hasil %}
+<div class="mt-4 p-3 border rounded bg-light">
+    <h5>Hasil Analisis untuk {{ nama_kelompok }}:</h5>
+    <ul>
+        <li>Rata-rata: {{ hasil.rata_rata }}</li>
+        <li>Tertinggi: {{ hasil.tertinggi }}</li>
+        <li>Terendah: {{ hasil.terendah }}</li>
+        <li>Indeks Gini: {{ hasil.gini }}</li>
+    </ul>
+</div>
+{% endif %}
+
+
+
+
             
             <p class="text-center mt-4 text-muted small">
                 © 2025 Aplikasi Analisis Wilayah • Powered by Flask & Bootstrap
