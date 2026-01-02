@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Analisis Pendapatan</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/all.min.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
         body { background-color: #f4f7f6; }
         .main-card { border: none; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
@@ -31,9 +31,9 @@
                     </div>
                     <form method="POST">
                         <div class="mb-4">
-                            <label for="wilayah" class="form-label fw-bold">Kelompok 1:</label>
-                            <select class="form-select" name="pilihan1" id="kelompok1" aria-label="Default select example">
-                            <option selected disabled>Pilih kelompok 1</option>
+                            <label for="wilayah" class="form-label fw-bold"><i class="fa-solid fa-user mx-2"></i>Kelompok 1:</label>
+                            <select class="form-select" name="pilihan1" id="kelompok1" aria-label="Default select example" required>
+                            <option value="" selected disabled>Pilih kelompok 1</option>
                             {% for k in kelompok_list %}
                                 <option value="{{ k.id }}">{{ k.nama_kelompok }} (Gini: {{ k.gini }})</option>
                             {% endfor %}
@@ -41,9 +41,9 @@
                         </div>
 
                         <div class="mb-4">
-                            <label for="wilayah" class="form-label fw-bold">Kelompok 2:</label>
-                            <select class="form-select" name="pilihan2" id="kelompok2" aria-label="Default select example">
-                            <option selected disabled>Pilih kelompok 2</option>
+                            <label for="wilayah" class="form-label fw-bold"><i class="fa-solid fa-user mx-2"></i>Kelompok 2:</label>
+                            <select class="form-select" name="pilihan2" id="kelompok2" aria-label="Default select example" required>
+                            <option value="" selected disabled>Pilih kelompok 2</option>
                             {% for k in kelompok_list %}
                                 <option value="{{ k.id }}">{{ k.nama_kelompok }} (Gini: {{ k.gini }})</option>
                             {% endfor %}
@@ -51,10 +51,10 @@
                         </div>
 
                         <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-primary btn-lg">
-                                <i class="bi bi-graph-up"></i> Bandingkan
+                            <button type="submit" class="btn btn-primary btn-md">
+                                <i class="fa-solid fa-scale-balanced"></i> Bandingkan
                             </button>
-                            <a href="{{ url_for('banding') }}" class="btn btn-outline-danger btn-sm">Reset Data</a>
+                            <a href="{{ url_for('banding') }}" class="btn btn-outline-danger btn-md"><i class="fa-solid fa-rotate-left me-1"></i>Reset Data</a>
                         </div>
                     </form>
 
@@ -92,7 +92,7 @@
                     {% endif %}
          
             <p class="text-center mt-4 text-muted small">
-                © 2025 Aplikasi Analisis Wilayah • Powered by Flask & Bootstrap
+                © Aplikasi Analisis Kesenjangan Wilayah 
             </p>
         </div>
     </div>

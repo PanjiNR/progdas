@@ -31,7 +31,7 @@ def index():
             cursor = conn.cursor()
             
             query = """
-                INSERT INTO hasil_statistik (nama_kelompok, rata_rata, tertinggi, terendah, gini)
+                INSERT IGNORE INTO hasil_statistik (nama_kelompok, rata_rata, tertinggi, terendah, gini)
                 VALUES (%s, %s, %s, %s, %s)
             """
             values = (

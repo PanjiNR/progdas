@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Riwayat Analisis</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/all.min.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
         body { background-color: #f4f7f6; }
         .main-card { border: none; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
@@ -61,13 +61,13 @@
                         </table>
                     </div>
                     <div class="text-center">
-                    <a class="btn btn-md btn-primary fw-bold" href="{{ url_for('banding') }}">Bandingkan Hasil</a>
+                    <a class="btn btn-md btn-primary fw-bold" href="{{ url_for('banding') }}"><i class="fa-solid fa-scale-balanced me-1"></i>Bandingkan Hasil</a>
                     </div>
                 </div>
             </div>
             
             <p class="text-center mt-4 text-muted small">
-                © 2025 Aplikasi Analisis Wilayah • Powered by Flask & Bootstrap
+                © Aplikasi Analisis Kesenjangan Wilayah 
             </p>
         </div>
     </div>
