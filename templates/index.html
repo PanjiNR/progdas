@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Analisis Pendapatan</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
         body { background-color: #f4f7f6; }
         .main-card { border: none; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
@@ -18,20 +19,23 @@
         <div class="col-md-8">
             <div class="card main-card">
                 <div class="header-section text-center">
-                    <h2 class="fw-bold mb-0">Analisis Kesenjangan Wilayah test</h2>
-                    <p class="mb-0 opacity-75">Hitung Indeks Gini & Statistik Pendapatan</p>
+                    <h2 class="fw-bold mb-0">Analisis Kesenjangan Wilayah</h2>
+                    <p class="mb-0 opacity-75">Hitung Indeks Gini</p>
                 </div>
 
                 <div class="card-body p-4">
                     <form method="POST">
                         <div class="mb-4">
-                            <label for="wilayah" class="form-label fw-bold">Nama kelompok:</label>
-                            <input type="text" name="namaKel" class="form-control" id="namaKel" placeholder="Masukan nama kelompok">
+                            <label for="wilayah" class="form-label fw-bold"><i class="fa-solid fa-user mx-2"></i>Nama kelompok:</label>
+                            <input type="text" name="namaKel" class="form-control" required id="namaKel" placeholder="Masukan nama kelompok">
+                            <div class="invalid-feedback">
+                            Isi nama kelompok.
+                            </div>
                         </div>
 
                         <div class="mb-4">
-                            <label class="form-label fw-bold">Masukkan Data Pendapatan:</label>
-                            <input type="text" name="pendapatan" class="form-control" 
+                            <label class="form-label fw-bold"><i class="fa-solid fa-money-bill mx-2"></i>Masukkan Data Pendapatan:</label>
+                            <input type="text" required name="pendapatan" class="form-control" 
                                    placeholder="Contoh: 3000, 5000, 2000, 8000">
                             <div class="form-text">Pisahkan angka dengan tanda koma (,).</div>
                         </div>
@@ -40,10 +44,15 @@
                             <button type="submit" class="btn btn-primary btn-lg">
                                 <i class="bi bi-graph-up"></i> Mulai Analisis
                             </button>
-                            <a href="{{ url_for('riwayat') }}" class="btn btn-primary btn-md">
-                                <i class="bi bi-graph-up"></i> Riwayat Hasil
-                            </button>
-                            <a href="/" class="btn btn-outline-danger btn-sm">Reset Data</a>
+                            <div class="row ">
+                                <div class="col">
+                                <a href="{{ url_for('riwayat') }}" class="btn btn-outline-primary btn-md w-100">
+                                    <i class="fa-solid fa-list"></i> Riwayat Hasil</a>
+                                </div>
+                                <div class="col">
+                                <a href="/" class="btn btn-outline-danger btn-md w-100"><i class="fa-solid fa-rotate-left me-1"></i>Reset Data</a>
+                                </div>
+                            </div>
                         </div>
                     </form>
 

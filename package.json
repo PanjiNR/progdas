@@ -1,5 +1,24 @@
 {
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^7.1.0",
     "bootstrap": "^5.3.8"
-  }
+  },
+  "name": "progdas",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PanjiNR/progdas.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PanjiNR/progdas/issues"
+  },
+  "homepage": "https://github.com/PanjiNR/progdas#readme",
+  "description": ""
 }
